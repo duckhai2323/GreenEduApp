@@ -1,11 +1,21 @@
+
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:greenedu/pages/signup/signup_controller.dart';
 
 import '../../color/colorapp.dart';
 
 class SignupPage extends GetView<SignupController>{
+  var EmailController = TextEditingController();
+  var PasswordController = TextEditingController();
+  var FullName = TextEditingController();
+  var Birthday = TextEditingController();
+  var PasswordConfirm = TextEditingController();
+  var TelePhone = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -49,7 +59,7 @@ class SignupPage extends GetView<SignupController>{
             ],
           ),
         ),
-        body: SingleChildScrollView(
+        body: Obx(()=>SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -58,18 +68,42 @@ class SignupPage extends GetView<SignupController>{
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 20),
                 child: Center(
-                  child: CircleAvatar(
-                    radius: 53,
-                    backgroundColor: AppColors.logoColor,
-                    child: CircleAvatar(
-                      radius: 50,
-                      backgroundImage: AssetImage('assets/images/avatar0.jpg'),
+                  child: InkWell(
+                    onTap: (){
+                      controller.PickImage();
+                    },
+                    child: Stack(
+                      children: [
+                        CircleAvatar(
+                          radius: 53,
+                          backgroundColor: AppColors.logoColor,
+                          child: controller.checkClickImage.value == false?
+                          const CircleAvatar(
+                            radius: 50,
+                            backgroundImage: AssetImage('assets/images/avatar0.jpg'),
+                          ):
+                          ClipOval(child: Image.file(controller.image.value,fit: BoxFit.cover,width: 100,height: 100,)),
+                        ),
+                        const Positioned(
+                          bottom: 0,
+                          right: 3,
+                          child: CircleAvatar(
+                            radius: 15,
+                            backgroundColor: AppColors.backgroundIntro,
+                            child: CircleAvatar(
+                              radius: 13,
+                              backgroundColor: AppColors.backgroundColor,
+                              child: Icon(Icons.camera_alt,size: 22,color: Colors.grey,),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
               ),
 
-              Padding(
+              const Padding(
                 padding: EdgeInsets.only(left: 20),
                 child: Text(
                   '* Thông tin cơ bản:',
@@ -84,6 +118,7 @@ class SignupPage extends GetView<SignupController>{
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 25,vertical: 5),
                 child: TextField(
+                  controller: FullName,
                   decoration: InputDecoration(
                     hintText: 'Họ và Tên',
                     hintStyle: TextStyle(color: Colors.grey,fontSize: 14,fontFamily: "Roboto-Medium"),
@@ -95,6 +130,7 @@ class SignupPage extends GetView<SignupController>{
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 25,vertical: 5),
                 child: TextField(
+                  controller: Birthday,
                   decoration: InputDecoration(
                     hintText: 'Ngày sinh',
                     hintStyle: TextStyle(color: Colors.grey,fontSize: 14,fontFamily: "Roboto-Medium"),
@@ -106,6 +142,7 @@ class SignupPage extends GetView<SignupController>{
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 25,vertical: 5),
                 child: TextField(
+                  controller: TelePhone,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     hintText: 'Số điện thoại',
@@ -118,7 +155,8 @@ class SignupPage extends GetView<SignupController>{
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 25,vertical: 5),
                 child: TextField(
-                  decoration: InputDecoration(
+                  controller: EmailController,
+                  decoration: const InputDecoration(
                     hintText: 'Email',
                     hintStyle: TextStyle(color: Colors.grey,fontSize: 14,fontFamily: "Roboto-Medium"),
                     prefixIcon: Icon(Icons.mail_outline,size: 23,color: Colors.grey),
@@ -129,7 +167,8 @@ class SignupPage extends GetView<SignupController>{
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 25,vertical: 5),
                 child:TextField(
-                  /*obscureText: controller.obscureText_.value,*/
+                  controller: PasswordController,
+                  obscureText: controller.obscureText1_.value,
                   keyboardType: TextInputType.visiblePassword,
                   decoration:InputDecoration(
                     hintText: 'Password',
@@ -137,9 +176,9 @@ class SignupPage extends GetView<SignupController>{
                     prefixIcon: Icon(Icons.lock_outline,size: 23,color: Colors.grey),
                     suffixIcon: InkWell(
                       onTap: (){
-                        //controller.ClickVisible();
+                        controller.ClickVisible1();
                       },
-                      child: Icon(/*controller.obscureText_.value?*/Icons.visibility_off/*:Icons.visibility*/,color: Colors.grey,size: 23,),
+                      child: Icon(controller.obscureText1_.value?Icons.visibility_off:Icons.visibility,color: Colors.grey,size: 23,),
                     ),
                   ),
                 ),
@@ -148,7 +187,8 @@ class SignupPage extends GetView<SignupController>{
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 25,vertical: 5),
                 child:TextField(
-                  /*obscureText: controller.obscureText_.value,*/
+                  controller: PasswordConfirm,
+                  obscureText: controller.obscureText2_.value,
                   keyboardType: TextInputType.visiblePassword,
                   decoration:InputDecoration(
                     hintText: 'Confirm Password',
@@ -156,79 +196,70 @@ class SignupPage extends GetView<SignupController>{
                     prefixIcon: Icon(Icons.lock_outline,size: 23,color: Colors.grey),
                     suffixIcon: InkWell(
                       onTap: (){
-                        //controller.ClickVisible();
+                        controller.ClickVisible2();
                       },
-                      child: Icon(/*controller.obscureText_.value?*/Icons.visibility_off/*:Icons.visibility*/,color: Colors.grey,size: 23,),
+                      child: Icon(controller.obscureText2_.value?Icons.visibility_off:Icons.visibility,color: Colors.grey,size: 23,),
                     ),
                   ),
                 ),
               ),
 
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 25),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Radio(
-                          value: 1,
-                          groupValue: 0,
-                          onChanged: (value){
-
-                          },
-                        ),
-
-                        Padding(
-                          padding: const EdgeInsets.only(left: 3),
-                          child: Text(
-                            'Giáo viên, Gia sư',
-                            style: TextStyle(
-                              fontWeight: FontWeight.normal,
-                              fontSize: 15,
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ),
-                      ],
+              Padding(
+                padding: const EdgeInsets.only(left: 25),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Radio(
+                      value: 1,
+                      groupValue: controller.value_.value,
+                      onChanged: (value){
+                        controller.ActionRadio(value!);
+                      },
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 25),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Radio(
-                          value: 1,
-                          groupValue: 0,
-                          onChanged: (value){
 
-                          },
-                        ),
-
-                        Padding(
-                          padding: const EdgeInsets.only(left: 3),
-                          child: Text(
-                            'Phụ huynh',
-                            style: TextStyle(
-                              fontWeight: FontWeight.normal,
-                              fontSize: 15,
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ),
-                      ],
+                    const Text(
+                      'Giáo viên, Gia sư',
+                      style: TextStyle(
+                        fontWeight: FontWeight.normal,
+                        fontSize: 15,
+                        color: Colors.grey,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 25),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Radio(
+                      value: 2,
+                      groupValue: controller.value_.value,
+                      onChanged: (value){
+                        controller.ActionRadio(value!);
+                      },
+                    ),
+
+                    const Text(
+                      'Phụ huynh, học sinh',
+                      style: TextStyle(
+                        fontWeight: FontWeight.normal,
+                        fontSize: 15,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
+                ),
               ),
 
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 30),
+                padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 15),
                 child: GestureDetector(
                   onTap: (){
+                    controller.CreateUserWithEmailAndPassword(EmailController.text, PasswordController.text);
+                    controller.PushDataUser("", FullName.text, Birthday.text, EmailController.text, PasswordController.text, TelePhone.text);
+                    controller.HandlePageSignIn();
                   },
                   child: Container(
                     height: 43,
@@ -259,7 +290,7 @@ class SignupPage extends GetView<SignupController>{
               ),
             ],
           ),
-        ),
+        ),),
       ),
     );
   }
