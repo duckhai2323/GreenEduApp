@@ -11,4 +11,7 @@ class SigninController extends GetxController{
   void HandlePageSignup(){
     Get.toNamed(AppRoutes.SIGN_UP);
   }
+  void HandleApplication(){
+    Get.toNamed(AppRoutes.APPLICATION);
+  }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:greenedu/pages/application/application_view.dart';
 import 'package:greenedu/pages/signin/signin_bindings.dart';
 import 'package:greenedu/pages/signin/signin_controller.dart';
 import 'package:greenedu/pages/signin/signin_view.dart';
@@ -8,6 +9,8 @@ import 'package:greenedu/pages/signup/signup_view.dart';
 import 'package:greenedu/pages/welcome/welcome_bindings.dart';
 import 'package:greenedu/pages/welcome/welcome_view.dart';
 import 'package:greenedu/routes/names.dart';
+
+import '../pages/application/application_bindings.dart';
 
 class AppPages{
   static final RouteObserver<Route> observer = RouteObserver();
@@ -29,6 +32,12 @@ class AppPages{
       name: AppRoutes.SIGN_UP,
       page: ()=>SignupPage(),
       binding: SignupBinding(),
+    ),
+
+    GetPage(
+      name: AppRoutes.APPLICATION,
+      page: ()=>ApplicationPage(),
+      binding: ApplicationBinding(),
     ),
   ];
 }
