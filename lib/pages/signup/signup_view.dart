@@ -164,6 +164,99 @@ class SignupPage extends GetView<SignupController>{
                 ),
               ),
 
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 25),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Radio(
+                          value: 1,
+                          groupValue: 0,
+                          onChanged: (value){
+
+                          },
+                        ),
+
+                        Padding(
+                          padding: const EdgeInsets.only(left: 3),
+                          child: Text(
+                            'Giáo viên, Gia sư',
+                            style: TextStyle(
+                              fontWeight: FontWeight.normal,
+                              fontSize: 15,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 25),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Radio(
+                          value: 1,
+                          groupValue: 0,
+                          onChanged: (value){
+
+                          },
+                        ),
+
+                        Padding(
+                          padding: const EdgeInsets.only(left: 3),
+                          child: Text(
+                            'Phụ huynh',
+                            style: TextStyle(
+                              fontWeight: FontWeight.normal,
+                              fontSize: 15,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 30),
+                child: GestureDetector(
+                  onTap: (){
+                  },
+                  child: Container(
+                    height: 43,
+                    decoration: BoxDecoration(
+                        color: AppColors.backgroundIntro,
+                        borderRadius: BorderRadius.circular(3),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 1,
+                            blurRadius: 2,
+                            offset: Offset(0,1),
+                          )
+                        ]
+                    ),
+                    child: const Center(
+                      child: Text(
+                        'Đăng ký',
+                        style: TextStyle(
+                          color: AppColors.textIntroColor,
+                          fontWeight:FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
