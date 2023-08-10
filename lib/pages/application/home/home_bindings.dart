@@ -1,12 +1,10 @@
 import 'package:get/get.dart';
-import 'package:greenedu/pages/application/application_controller.dart';
 import 'package:greenedu/pages/application/home/home_controller.dart';
 
-class ApplicationBinding extends Bindings{
+class HomeBindings extends Bindings{
 
   @override
   void dependencies() {
-    Get.lazyPut(() => ApplicationController());
     Get.lazyPut(() => HomeController());
   }
 }

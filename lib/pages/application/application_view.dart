@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:greenedu/pages/application/application_controller.dart';
+import 'package:greenedu/pages/application/home/home_view.dart';
 
 import '../../color/colorapp.dart';
 import '../../color/colorapp.dart';
@@ -20,7 +21,7 @@ class ApplicationPage extends GetView<ApplicationController>{
             controller.handPageChanged(index);
           },
           children: [
-            Center(child: Text('fkfnskfns'),),
+            HomePage(),
             Center(child: Text('sdkjfksjfks'),),
             Center(child: Text('danh ba'),),
             Center(child: Text('sfjksfksjf'),),

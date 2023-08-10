@@ -2,11 +2,12 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:greenedu/user/tutor.dart';
 import 'package:image_picker/image_picker.dart';
-
+import 'package:flutter/widgets.dart';
 import '../../routes/names.dart';
 
 class SignupController extends GetxController{
@@ -18,6 +19,7 @@ class SignupController extends GetxController{
   var image = File('').obs;
   var checkClickImage = false.obs;
   SignupController();
+
   Future<void> PickImage() async {
     try{
       var image_ = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -64,8 +66,10 @@ class SignupController extends GetxController{
 
     }else if(value_.value == 1){
       role = "1";
-    }else {
+    }else if(value_.value == 2){
       role = "2";
+    } else {
+      role = "3";
     }
     String documentId = firebase.collection("users").doc().id;
     var data  = Tutor(documentId, image, fullName, birthday, email, password, numberPhone, role);

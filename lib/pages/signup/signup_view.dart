@@ -66,7 +66,7 @@ class SignupPage extends GetView<SignupController>{
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.symmetric(vertical: 20),
+                padding: EdgeInsets.only(top: 15,bottom: 10),
                 child: Center(
                   child: InkWell(
                     onTap: (){
@@ -254,7 +254,32 @@ class SignupPage extends GetView<SignupController>{
               ),
 
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 15),
+                padding: const EdgeInsets.only(left: 25),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Radio(
+                      value: 3,
+                      groupValue: controller.value_.value,
+                      onChanged: (value){
+                        controller.ActionRadio(value!);
+                      },
+                    ),
+
+                    const Text(
+                      'Trung tâm luyện thi',
+                      style: TextStyle(
+                        fontWeight: FontWeight.normal,
+                        fontSize: 15,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: GestureDetector(
                   onTap: (){
                     controller.CreateUserWithEmailAndPassword(EmailController.text, PasswordController.text);
@@ -286,6 +311,7 @@ class SignupPage extends GetView<SignupController>{
                       ),
                     ),
                   ),
+
                 ),
               ),
             ],

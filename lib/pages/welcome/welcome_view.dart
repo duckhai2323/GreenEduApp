@@ -22,11 +22,11 @@ class WelcomePage extends GetView<WelcomeController>{
                 controller.ChangedPage(index);
               },
               children: [
-                page('Ocean Education','OceanEdu là một ững dụng giúp bạn có thể kết nối với'
+                page('Green Education','GreenEdu là một ững dụng giúp bạn có thể kết nối với'
                     ' đội ngũ gia sư nhiệt huyết của chúng tôi.','assets/images/logo_greenEdu.png'),
                 page('Bạn là giáo viên, sinh viên?','Gia nhập vào đội ngũ gia sư của OceanEdu, nhận lớp và có thêm thu nhập từ những kiến thức, kỹ năng giảng dạy của bạn.','assets/images/intro1_1.png'),
                 page('Bạn cần thuê gia sư?','GreenEdu  luôn làm việc chuyên nghiệp và trách nhiệm, bắt đầu từ việc tuyển chọn đến đào tạo gia sư. ','assets/images/intro2_1.png'),
-                page('Ocean Education','Thủ tục nhanh chóng tiện lợi và hoàn toàn miễn phí','assets/images/intro3_1.png'),
+                page('Green Education','Thủ tục nhanh chóng tiện lợi và hoàn toàn miễn phí','assets/images/intro3_1.png'),
               ],
             ),
 
@@ -93,8 +93,8 @@ class WelcomePage extends GetView<WelcomeController>{
       mainAxisSize: MainAxisSize.max,
       children: [
         SizedBox(
-          width: title=="Ocean Education"?230:260,
-          height: title=="Ocean Education"?200:240,
+          width: title=="Green Education"?230:260,
+          height: title=="Green Education"?200:240,
           child: Image.asset(
             imageStr,
             fit: BoxFit.fitWidth,
