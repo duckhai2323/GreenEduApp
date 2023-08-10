@@ -142,7 +142,7 @@ class HomePage extends GetView<HomeController>{
                 ],
               ),
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(left: 10,bottom:15,right: 10 ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
