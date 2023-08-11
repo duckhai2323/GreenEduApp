@@ -14,6 +14,9 @@ class ClassToTutor {
   final String? userid;
   final Timestamp? timestamp;
   final String? formality;
+  final String? capacity;
+  final String? sex;
+  final String demand;
 
   ClassToTutor(
       this.classid,
@@ -28,7 +31,10 @@ class ClassToTutor {
       this.subject,
       this.userid,
       this.timestamp,
-      this.formality);
+      this.formality,
+      this.capacity,
+      this.sex,
+      this.demand);
 
   factory ClassToTutor.fromFirebase(DocumentSnapshot<Map<String,dynamic>> snapshot, SnapshotOptions? option){
     final data = snapshot.data();
@@ -46,6 +52,9 @@ class ClassToTutor {
       data?['userid']??"",
       data?['timestamp']??"",
       data?['formality']??"",
+      data?['capacity']??"",
+      data?['sex']??"",
+      data?['demand']??"",
     );
   }
 
@@ -64,6 +73,9 @@ class ClassToTutor {
       "userid":userid??"",
       "timestamp":timestamp??"",
       "formality":formality??"",
+      "capacity":capacity??"",
+      "sex":sex??"",
+      "demand":demand??"",
     };
   }
 }

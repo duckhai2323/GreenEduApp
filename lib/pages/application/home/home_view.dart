@@ -52,7 +52,7 @@ class HomePage extends GetView<HomeController>{
                             )
                           ]
                       ),
-                      child:TextField(
+                      child:const TextField(
                         decoration: InputDecoration(
                           hintText: 'Tìm kiếm môn học',
                           hintStyle: TextStyle(color: Colors.grey,fontSize: 15,fontWeight: FontWeight.bold),

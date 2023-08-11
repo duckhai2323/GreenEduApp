@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:greenedu/class/classtotutor.dart';
+import 'package:greenedu/routes/names.dart';
 
 class HomeController extends GetxController{
   HomeController();
@@ -31,5 +32,9 @@ class HomeController extends GetxController{
         }
       }
     });
+  }
+
+  Future<void> HandleToInfor(String id) async {
+    Get.toNamed(AppRoutes.INFORCLASSTOTUTOR,arguments: id);
   }
 }
