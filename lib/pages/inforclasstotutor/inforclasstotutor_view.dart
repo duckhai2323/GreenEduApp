@@ -14,6 +14,49 @@ class InforClassToTutorPage extends GetView<InforClassToTutorController>{
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar:AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: AppColors.backgroundIntro,
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1),
+          child: Container(
+            color: Colors.grey.withOpacity(0.3),
+            height: 1,
+          ),
+        ),
+        title: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.arrow_back_ios),
+                  iconSize: 23,
+                  color: AppColors.backgroundColor,
+                  onPressed: (){
+                    controller.HandleBack();
+                  },
+                ),
+              ],
+            ),
+            const Text(
+              'Chi tiết',
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(
+              width: 30,
+              height: 30,
+            ),
+          ],
+        ),
+      ),
         backgroundColor: AppColors.backgroundColor,
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
@@ -22,52 +65,6 @@ class InforClassToTutorPage extends GetView<InforClassToTutorController>{
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-                height: 50,
-                width: MediaQuery.of(context).size.width,
-                color: AppColors.backgroundIntro,
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    InkWell(
-                      onTap: (){
-
-                      },
-                      child: InkWell(
-                        onTap: (){
-                          controller.HandleBack();
-                        },
-                        child: const Row(
-                          children: [
-                            Icon(Icons.arrow_back_ios,size: 23,color: Colors.white,),
-                            Text(
-                              'Lớp mới',
-                              style: TextStyle(
-                                fontSize: 17,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-
-                    const SizedBox(width: 80),
-
-                    const Text(
-                      'Chi tiết',
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-
-                  ],
-                ),
-              ),
 
               InforClass(),
 
