@@ -2,9 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:greenedu/pages/application/application_controller.dart';
 import 'package:greenedu/user/parent.dart';
 
 import '../../class/classtotutor.dart';
+import '../../mess/msg.dart';
 import '../../routes/names.dart';
 import '../../user/user.dart';
 
@@ -85,6 +87,32 @@ class InforClassToTutorController extends GetxController{
     parentInfor.value.clear();
     checkIsEmpty.value = false;
     DisplayInfor(idStr);
+  }
+
+  Future<void> HandleToChat() async {
+    String checkFist = 'false';
+    String doc_id="";
+
+    var from_messages = await db.collection("message").withConverter(
+        fromFirestore:Msg.fromFirestore,
+        toFirestore: (Msg msg, options) => msg.toFirestore()
+    ).where(
+        "from_uid", isEqualTo: ApplicationController.token
+    ).where("to_uid",isEqualTo:parentInfor[0].id).get();
+
+    var to_messages = await db.collection("message").withConverter(
+        fromFirestore:Msg.fromFirestore,
+        toFirestore: (Msg msg, options) => msg.toFirestore()
+    ).where(
+        "from_uid", isEqualTo: parentInfor[0].id
+    ).where("to_uid",isEqualTo: ApplicationController.token).get();
+
+    if(from_messages.docs.isNotEmpty || to_messages.docs.isNotEmpty){
+      checkFist = 'true';
+      if(from_messages.docs.isNotEmpty){doc_id = from_messages.docs.first.id;}
+      if(to_messages.docs.isNotEmpty){doc_id = to_messages.docs.first.id;}
+    }
+    Get.toNamed(AppRoutes.CHAT,parameters: {"to_uid": parentInfor[0].id??"","to_name":parentInfor[0].fullName??"","to_avatar":parentInfor[0].image??"","check_first":checkFist??"","doc_id":doc_id??""});
   }
 
   void HandleBack(){

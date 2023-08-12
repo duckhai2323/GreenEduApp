@@ -4,4 +4,5 @@ class AppRoutes{
   static const SIGN_UP = '/sign_up';
   static const APPLICATION = '/application';
   static const INFORCLASSTOTUTOR = '/inforclasstotutor';
+  static const CHAT = '/chat';
 }

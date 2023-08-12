@@ -9,6 +9,8 @@ class SigninPage extends GetView<SigninController>{
 
   @override
   Widget build(BuildContext context) {
+    var text1Controller = TextEditingController();
+    var text2Controller = TextEditingController();
     return SafeArea(
       child: Scaffold(
         backgroundColor: AppColors.backgroundColor,
@@ -52,9 +54,10 @@ class SigninPage extends GetView<SigninController>{
                   height: 20,
                 ),
 
-                const Padding(
+                Padding(
                   padding: EdgeInsets.symmetric(horizontal: 25),
                   child: TextField(
+                    controller: text1Controller,
                     decoration: InputDecoration(
                       hintText: 'Email',
                       hintStyle: TextStyle(color: Colors.grey,fontSize: 14,fontFamily: "Roboto-Medium"),
@@ -70,6 +73,7 @@ class SigninPage extends GetView<SigninController>{
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 25),
                   child:TextField(
+                    controller: text2Controller,
                     obscureText: controller.obscureText_.value,
                     keyboardType: TextInputType.visiblePassword,
                     decoration:InputDecoration(
@@ -92,7 +96,7 @@ class SigninPage extends GetView<SigninController>{
 
                 InkWell(
                   onTap: (){
-                    controller.HandleApplication();
+                    controller.HandleApplication(text1Controller.text,text2Controller.text);
                   },
                   child: Container(
                     margin: const EdgeInsets.symmetric(horizontal: 25),

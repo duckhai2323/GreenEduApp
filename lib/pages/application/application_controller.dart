@@ -6,6 +6,9 @@ import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import '../../color/colorapp.dart';
 
 class ApplicationController extends GetxController{
+  static late String token;
+  static late String image;
+  static late String name;
   ApplicationController();
   final state = 0.obs;
   late final List<String> tabTitles;
@@ -16,6 +19,9 @@ class ApplicationController extends GetxController{
   void onInit() async {
     // TODO: implement onInit
     super.onInit();
+    token = Get.parameters['userId']??"";
+    image = Get.parameters['image']??"";
+    name = Get.parameters['name']??"";
     bottomTab = <BottomNavigationBarItem>[
       const BottomNavigationBarItem(
         icon: Icon(

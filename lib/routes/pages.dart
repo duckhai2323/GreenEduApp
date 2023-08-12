@@ -12,6 +12,8 @@ import 'package:greenedu/pages/welcome/welcome_view.dart';
 import 'package:greenedu/routes/names.dart';
 
 import '../pages/application/application_bindings.dart';
+import '../pages/chat/chat_bindings.dart';
+import '../pages/chat/chat_view.dart';
 import '../pages/inforclasstotutor/inforclasstotutor_view.dart';
 
 class AppPages{
@@ -46,6 +48,12 @@ class AppPages{
       name: AppRoutes.INFORCLASSTOTUTOR,
       page: ()=>InforClassToTutorPage(),
       binding: InforClassToTutorBinding(),
+    ),
+
+    GetPage(
+      name: AppRoutes.CHAT,
+      page: ()=>ChatPage(),
+      binding: ChatBinding(),
     ),
   ];
 }

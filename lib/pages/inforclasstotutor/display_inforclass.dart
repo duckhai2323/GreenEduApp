@@ -98,7 +98,7 @@ class InforClass extends GetView<InforClassToTutorController>{
                 SizedBox(width: 20,),
                 Icon(Icons.phone,size: 35,color:AppColors.backgroundIntro),
                 SizedBox(width: 10,),
-                Icon(CupertinoIcons.chat_bubble_text,size: 35,color:AppColors.backgroundIntro),
+                InkWell(onTap: (){controller.HandleToChat();},child: Icon(CupertinoIcons.chat_bubble_text,size: 35,color:AppColors.backgroundIntro)),
               ],
             ),
           ),

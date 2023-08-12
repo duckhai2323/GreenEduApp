@@ -76,7 +76,7 @@ class SignupController extends GetxController{
     await firebase.collection('users').withConverter(
       fromFirestore: Tutor.fromFirestore,
       toFirestore: (Tutor userdata, options)=>userdata.toFirestore(),
-    ).add(data);
+    ).doc(documentId).set(data);
   }
 
   void HandlePageSignIn(){

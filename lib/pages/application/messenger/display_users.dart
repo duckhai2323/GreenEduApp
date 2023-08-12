@@ -1,11 +1,15 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:greenedu/pages/application/application_controller.dart';
 import 'package:greenedu/pages/application/messenger/messenger_controller.dart';
+
+import '../../../mess/msg.dart';
 
 class DisplayUsers extends GetView<MessController>{
 
-  Widget ItemUser1 (){
-   /* String token = UserStore.to.token;
+  Widget ItemUser1 (Msg item){
+    String token = ApplicationController.token;
     String? url;
     String? name;
     if(item.from_uid == token){
@@ -14,7 +18,7 @@ class DisplayUsers extends GetView<MessController>{
     } else {
       url = item.from_avatar;
       name = item.from_name;
-    }*/
+    }
     return Column(
       children: [
         ListTile(
@@ -27,7 +31,7 @@ class DisplayUsers extends GetView<MessController>{
                   padding: EdgeInsets.all(2),
                   child: CircleAvatar(
                     radius: 37,
-                    backgroundImage: /*CachedNetworkImageProvider(url??"")*/ AssetImage('assets/images/avatar0.png'),
+                    backgroundImage: CachedNetworkImageProvider(url??""),
                   ),
                 ) ,
               ),
@@ -47,7 +51,7 @@ class DisplayUsers extends GetView<MessController>{
           ),
 
           title: Text(
-            "Tran Thanh Nhan",
+            name??"",
             style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.bold
@@ -55,8 +59,7 @@ class DisplayUsers extends GetView<MessController>{
           ),
 
           subtitle: Text(
-            /*controller.MessAndTime(item),*/
-            'i love you',
+            controller.MessAndTime(item),
             style: TextStyle(
               color: Colors.grey,
               fontWeight:  FontWeight.bold,
@@ -84,22 +87,21 @@ class DisplayUsers extends GetView<MessController>{
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Obx(()=>Container(
       margin: const EdgeInsets.only(right: 10,top: 5,bottom: 10),
       width: MediaQuery.of(context).size.width,
       child: ListView.builder(
-        itemCount: 5,
+        itemCount: controller.listUser.length,
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
         itemBuilder: (BuildContext context, int index){
           return InkWell(
               onTap:(){
-
+                controller.ClickItemChat(controller.listUser[index]);
               } ,
-              child: ItemUser1(),
-          );
+              child: ItemUser1(controller.listUser[index]));
         },
       ),
-    );
+    ));
   }
 }
