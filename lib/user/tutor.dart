@@ -20,7 +20,7 @@ class Tutor extends User {
       {this.uniName,
       this.major,
       this.level,
-      this.leap}):super(id,image,fullName,birthday,email,password,numberPhone,role);
+      this.leap,}):super(id,image,fullName,birthday,email,password,numberPhone,role);
 
   factory Tutor.fromFirestore(DocumentSnapshot<Map<String,dynamic>> snapshot,SnapshotOptions? options){
     final data = snapshot.data();

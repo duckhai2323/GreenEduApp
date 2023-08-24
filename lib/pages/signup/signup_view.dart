@@ -283,7 +283,7 @@ class SignupPage extends GetView<SignupController>{
                 child: GestureDetector(
                   onTap: (){
                     controller.CreateUserWithEmailAndPassword(EmailController.text, PasswordController.text);
-                    controller.PushDataUser("", FullName.text, Birthday.text, EmailController.text, PasswordController.text, TelePhone.text);
+                    controller.PushDataUser(FullName.text, Birthday.text, EmailController.text, PasswordController.text, TelePhone.text);
                     controller.HandlePageSignIn();
                   },
                   child: Container(

@@ -1,13 +1,16 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:greenedu/class/subcribeClass.dart';
 import 'package:greenedu/pages/application/application_controller.dart';
 import 'package:greenedu/user/parent.dart';
 
 import '../../class/classtotutor.dart';
 import '../../mess/msg.dart';
 import '../../routes/names.dart';
+import '../../user/tutor.dart';
 import '../../user/user.dart';
 
 class InforClassToTutorController extends GetxController{
@@ -18,7 +21,7 @@ class InforClassToTutorController extends GetxController{
   final classInfor = <ClassToTutor>[].obs;
   final parentInfor = <Parent>[].obs;
   var listener;
-  final subscribe = 'Ứng Tuyển'.obs;
+  final subscribe = ''.obs;
   final checkIsEmpty = false.obs;
 
   @override
@@ -26,6 +29,7 @@ class InforClassToTutorController extends GetxController{
     super.onInit();
     id = Get.arguments;
     DisplayInfor(id.toString());
+    CheckSubcribe(id.toString());
   }
 
   Future<void> DisplayInfor(String id) async {
@@ -73,10 +77,32 @@ class InforClassToTutorController extends GetxController{
     checkIsEmpty.value = true;
   }
 
-  void Subcribe(){
+  Future<void> CheckSubcribe(String id) async {
+    final subClassData = await db.collection("subcribeclass").withConverter(
+        fromFirestore: SubcribeClass.fromFirestore,
+        toFirestore: (SubcribeClass subClass, options) => subClass.toFirestore()
+    ).where("tutorid",isEqualTo: ApplicationController.token).where("classid",isEqualTo: id).get();
+    if(subClassData.docs.isEmpty){
+      subscribe.value = "Ứng Tuyển";
+    }else {subscribe.value = "Đã Đăng Ký";}
+  }
+
+  Future<void> Subcribe() async {
     if(subscribe.value == 'Ứng Tuyển'){
       subscribe.value = 'Đã Đăng Ký';
+      final subcribeClass = SubcribeClass(parentInfor[0].id??"",ApplicationController.token,id.toString(),"wait");
+      await db.collection("subcribeclass").withConverter(
+        fromFirestore: SubcribeClass.fromFirestore,
+        toFirestore: (SubcribeClass subClass, options) => subClass.toFirestore()
+      ).add(subcribeClass);
+
     } else {
+      final subClassData = await db.collection("subcribeclass").withConverter(
+          fromFirestore: SubcribeClass.fromFirestore,
+          toFirestore: (SubcribeClass subClass, options) => subClass.toFirestore()
+      ).where("tutorid",isEqualTo: ApplicationController.token).where("classid",isEqualTo: id).get();
+      String idSubcribe = subClassData.docs.first.id;
+      await db.collection("subcribeclass").doc(idSubcribe).delete();
       subscribe.value = 'Ứng Tuyển';
     }
   }
@@ -87,6 +113,7 @@ class InforClassToTutorController extends GetxController{
     parentInfor.value.clear();
     checkIsEmpty.value = false;
     DisplayInfor(idStr);
+    CheckSubcribe(idStr);
   }
 
   Future<void> HandleToChat() async {

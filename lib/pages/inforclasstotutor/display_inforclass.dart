@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
@@ -52,7 +53,7 @@ class InforClass extends GetView<InforClassToTutorController>{
                       backgroundColor: Colors.lightBlueAccent,
                       child:CircleAvatar(
                         radius: 33,
-                        backgroundImage: AssetImage('assets/images/avatar0.png')/*CachedNetworkImageProvider(url??"")*/,
+                        backgroundImage: CachedNetworkImageProvider(controller.parentInfor[0].image??""),
                       ) ,
                     ),
                     const Positioned(
