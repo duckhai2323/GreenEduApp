@@ -45,7 +45,7 @@ class InforClassToTutorPage extends GetView<InforClassToTutorController>{
             const Text(
               'Chi tiết',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 19,
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),

@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:greenedu/pages/allclass/fromparent/classfromparent_bindings.dart';
+import 'package:greenedu/pages/allclass/fromparent/classfromparent_view.dart';
 import 'package:greenedu/pages/application/application_view.dart';
 import 'package:greenedu/pages/inforclasstotutor/inforclasstotutor_bindings.dart';
 import 'package:greenedu/pages/signin/signin_bindings.dart';
@@ -54,6 +56,12 @@ class AppPages{
       name: AppRoutes.CHAT,
       page: ()=>ChatPage(),
       binding: ChatBinding(),
+    ),
+
+    GetPage(
+      name: AppRoutes.ALLCLASSFROMPARENT,
+      page: ()=>ClassFromParentPage(),
+      binding: ClassFromParentBinding(),
     ),
   ];
 }

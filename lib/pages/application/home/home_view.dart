@@ -128,13 +128,18 @@ class HomePage extends GetView<HomeController>{
                           )
                         ]
                     ),
-                    child: const Center(
-                      child: Text(
-                        'Xem tất cả các lớp',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight:FontWeight.w600,
-                          fontSize: 18,
+                    child: InkWell(
+                      onTap: (){
+                        controller.HandleAllClass1();
+                      },
+                      child: const Center(
+                        child: Text(
+                          'Xem tất cả các lớp',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight:FontWeight.w600,
+                            fontSize: 18,
+                          ),
                         ),
                       ),
                     ),

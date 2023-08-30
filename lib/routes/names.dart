@@ -5,4 +5,5 @@ class AppRoutes{
   static const APPLICATION = '/application';
   static const INFORCLASSTOTUTOR = '/inforclasstotutor';
   static const CHAT = '/chat';
+  static const ALLCLASSFROMPARENT = '/allclassfromparent';
 }

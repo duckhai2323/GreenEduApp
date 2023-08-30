@@ -37,4 +37,9 @@ class HomeController extends GetxController{
   Future<void> HandleToInfor(String id) async {
     Get.toNamed(AppRoutes.INFORCLASSTOTUTOR,arguments: id);
   }
+
+  void HandleAllClass1() {
+    Get.toNamed(AppRoutes.ALLCLASSFROMPARENT);
+  }
+
 }
