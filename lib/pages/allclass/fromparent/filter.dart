@@ -44,13 +44,16 @@ class FilterWidget extends GetView<ClassFromParentController>{
         ),
         Expanded(
           child: Container(
+            margin: EdgeInsets.only(right: 10),
             height: 42,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount:controller.listFilter.length,
               shrinkWrap: true,
               itemBuilder: (BuildContext context,index){
-                return ItemList(controller.listFilter[index].text??"", controller.listFilter[index].color!, controller.listFilter[index].icon!);
+                return InkWell(
+                    onTap:(){controller.ShowDialogFilter(context, controller.listFilter[index].key!);},
+                    child: ItemList(controller.listFilter[index].text??"", controller.listFilter[index].color1!,controller.listFilter[index].color2!, controller.listFilter[index].icon!));
               },
             ),
           ),
@@ -59,16 +62,16 @@ class FilterWidget extends GetView<ClassFromParentController>{
     ),);
   }
 
-  Widget ItemList(String text, Color color, Icon icon){
+  Widget ItemList(String text, Color background, Color border, Icon icon){
     return Container(
       margin: EdgeInsets.only(left: 10),
       height:42,
       padding: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
-        color: Colors.grey.shade300,
+        color: background,
         border: Border.all(
-          color: color,
+          color: border,
           width: 1,
         ),
       ),

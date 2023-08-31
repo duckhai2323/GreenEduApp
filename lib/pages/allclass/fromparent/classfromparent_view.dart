@@ -26,7 +26,9 @@ class ClassFromParentPage extends GetView<ClassFromParentController>{
             ),
           ),
           leading: InkWell(
-            onTap: (){},
+            onTap: (){
+              controller.HandleBack();
+            },
             child: const Icon(
               Icons.arrow_back_ios,
               color: AppColors.backgroundColor,
@@ -118,14 +120,14 @@ class ClassFromParentPage extends GetView<ClassFromParentController>{
                       onTap: (){
                         controller.SetArrange();
                       },
-                        child: Icon(Icons.window_outlined,size: 35,color: AppColors.backgroundIntro,),
+                        child:  Obx(() => !controller.checkArrange.value?Icon(Icons.window_outlined,size: 35,color: AppColors.backgroundIntro,):Icon(Icons.menu_outlined,size: 35,color: AppColors.backgroundIntro,),),
                     ),
                   ],
                 ),
               ),
               FilterWidget(),
               SizedBox(height: 20,),
-              Obx(()=>controller.checkArrange.value?ListClass():GridViewList(),),
+              Obx(() => !controller.checkArrange.value?ListClass():GridViewList()),
             ],
           ),
         ),
