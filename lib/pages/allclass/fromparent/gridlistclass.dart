@@ -114,12 +114,15 @@ class GridViewList extends GetView<ClassFromParentController>{
         children: [
           icon,
           SizedBox(width: 5,),
-          Text(
-            content,
-            style: TextStyle(
-              fontSize: 17,
-              fontWeight: FontWeight.w400,
-              color:color,
+          Expanded(
+            child: Text(
+              content,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontSize: 17,
+                fontWeight: FontWeight.w400,
+                color:color,
+              ),
             ),
           )
         ],

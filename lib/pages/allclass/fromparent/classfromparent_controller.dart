@@ -13,6 +13,7 @@ class ClassFromParentController extends GetxController{
   final listClassToTutor = <ClassToTutor>[].obs;
   final db = FirebaseFirestore.instance;
   var listener;
+  final mapFilter = <String,String>{}.obs;
   @override
   void onInit(){
     super.onInit();
@@ -22,11 +23,29 @@ class ClassFromParentController extends GetxController{
     listFilter.add(ItemFilter('Chọn số buổi/tuần',Colors.grey.shade200,Colors.grey.shade200, Icon(Icons.add,size: 20,color:AppColors.backgroundIntro),"onweek"));
     listFilter.add(ItemFilter('Chọn yêu cầu',Colors.grey.shade200,Colors.grey.shade200, Icon(Icons.add,size: 20,color:AppColors.backgroundIntro),"require"));
     listFilter.add(ItemFilter('Chọn hình thức',Colors.grey.shade200,Colors.grey.shade200, Icon(Icons.add,size: 20,color:AppColors.backgroundIntro),"formality"));
+    GetData();
+  }
 
+  void SetArrange(){
+    checkArrange.value?checkArrange.value = false:checkArrange.value = true;
+  }
+
+  Future<void> HandleToInfor(String id) async {
+    Get.toNamed(AppRoutes.INFORCLASSTOTUTOR,arguments: id);
+  }
+
+  void HandleBack(){
+    Get.back();
+  }
+
+  void GetData(){
     var data = db.collection("classtotutor").withConverter(
         fromFirestore: ClassToTutor.fromFirebase,
         toFirestore: (ClassToTutor classToTutor, options) => classToTutor.toFirebase()
     ).orderBy("timestamp",descending: false);
+    for(var entry in mapFilter.entries){
+      data = data.where(entry.key,isEqualTo: entry.value);
+    }
     listClassToTutor.clear();
     listener = data.snapshots().listen((event) {
       for(var change in event.docChanges){
@@ -44,18 +63,6 @@ class ClassFromParentController extends GetxController{
       }
     });
 
-  }
-
-  void SetArrange(){
-    checkArrange.value?checkArrange.value = false:checkArrange.value = true;
-  }
-
-  Future<void> HandleToInfor(String id) async {
-    Get.toNamed(AppRoutes.INFORCLASSTOTUTOR,arguments: id);
-  }
-
-  void HandleBack(){
-    Get.back();
   }
 
   void ShowDialogFilter(BuildContext context,String key){
@@ -170,6 +177,8 @@ class ClassFromParentController extends GetxController{
                         if(listFilter[i].key == key){
                           listFilter.insert(i, ItemFilter(title2,Colors.grey.shade200,Colors.grey.shade200, Icon(Icons.add,size: 20,color:AppColors.backgroundIntro),key));
                           listFilter.removeAt(i+1);
+                          mapFilter.remove(key);
+                          GetData();
                         }
                       }
                       Navigator.pop(context);
@@ -194,9 +203,23 @@ class ClassFromParentController extends GetxController{
                     return InkWell(
                       onTap: (){
                         for(int i = 0; i< listFilter.length;i++){
-                          if(listFilter[i].key == key){
-                            listFilter.insert(i, ItemFilter(list[index],Colors.white,AppColors.backgroundIntro, const Icon(Icons.arrow_drop_down_outlined,size: 25,color: AppColors.backgroundIntro,), key));
-                            listFilter.removeAt(i+1);
+                          if(listFilter[i].key == key) {
+                            listFilter.insert(i, ItemFilter(
+                                list[index], Colors.white,
+                                AppColors.backgroundIntro, const Icon(
+                              Icons.arrow_drop_down_outlined, size: 25,
+                              color: AppColors.backgroundIntro,), key));
+                            listFilter.removeAt(i + 1);
+                            if(key == "onweek"){
+                              String text = list[index];
+                              mapFilter[key] = text[0];
+                            } else if(key == "grade"){
+                              String text = list[index].substring(list[index].indexOf(" ")+1);
+                              mapFilter[key] = text;
+                            } else {
+                              mapFilter[key] = list[index];
+                            }
+                            GetData();
                           }
                         }
                         Navigator.pop(context);
