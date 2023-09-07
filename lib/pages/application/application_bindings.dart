@@ -3,6 +3,8 @@ import 'package:greenedu/pages/application/application_controller.dart';
 import 'package:greenedu/pages/application/home/home_controller.dart';
 import 'package:greenedu/pages/application/messenger/messenger_controller.dart';
 
+import 'classmanager/management_controller.dart';
+
 class ApplicationBinding extends Bindings{
 
   @override
@@ -10,5 +12,6 @@ class ApplicationBinding extends Bindings{
     Get.lazyPut(() => ApplicationController());
     Get.lazyPut(() => HomeController());
     Get.lazyPut(() => MessController());
+    Get.lazyPut(() => ManagementController());
   }
 }

@@ -151,8 +151,8 @@ class ClassFromParentController extends GetxController{
           children: [
             Container(
               height: 50,
-              padding: EdgeInsets.symmetric(horizontal: 15,vertical: 10),
-              decoration: BoxDecoration(
+              padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 10),
+              decoration: const BoxDecoration(
                 color:AppColors.backgroundIntro,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(15),

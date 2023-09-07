@@ -51,7 +51,7 @@ class ApplicationController extends GetxController{
           color: AppColors.backgroundIntro,
           size: 25,
         ),
-        label: 'Quản lí',
+        label: 'Quản lý',
         backgroundColor: Colors.transparent,
       ),
 
